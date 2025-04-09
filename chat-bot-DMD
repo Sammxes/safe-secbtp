@@ -1,9 +1,6 @@
-import openai
-
-# Configurar tu clave API de OpenAI
+import OpenAI 
 openai.api_key = "TU_CLAVE_API_AQUÍ" 
 
-# Diccionario con las preguntas y respuestas predefinidas
 respuestas_bot = {
     "¿Cuáles son los precios de los servicios de marketing?": "Los precios dependen del servicio específico, pero comienzan en $500 mensuales.",
     "¿Qué horarios manejan para consultas?": "Ofrecemos consultas de lunes a viernes de 9:00 a.m. a 6:00 p.m.",
@@ -18,16 +15,18 @@ respuestas_bot = {
     "¿Proyects?": "Nuestro trabajo es generar, implementar y analizar estrategias que te permitan obtener la mayor cantidad de clientes potenciales a través de plataformas digitales."
 }
 
-# Función para hacer una consulta a la API de OpenAI
 def consultar_chatgpt(pregunta):
     response = openai.Completion.create(
-        engine="text-davinci-003",  # El modelo de ChatGPT que deseas usar
+        engine="text-davinci-003",  
+
+# El modelo de ChatGPT que deseas usar
         prompt=pregunta,
         max_tokens=150
     )
     return response.choices[0].text.strip()
 
 # Función para el bot
+
 def bot_marketing():
     print("Hola ! Soy tu B. De Marketing y publicidad. Puedes hacerme preguntas sobre los siguientes temas:")
     print("1. Precios de Servicios")
@@ -38,7 +37,7 @@ def bot_marketing():
     while True:
         pregunta = input("Haz tu pregunta: ")
 
-        # Responder a la pregunta si está en el diccionario.
+# Responder a la pregunta si está en el diccionario.
         if pregunta.lower() in respuestas_bot:
             respuesta = respuestas_bot[pregunta.lower()]
             print(respuesta)
@@ -47,7 +46,7 @@ def bot_marketing():
             respuesta = consultar_chatgpt(pregunta)
             print(respuesta)
 
-        # Opción para salir del bot
+# Opción para salir del bot
         salir = input("¿Quieres hacer otra pregunta? (sí/no): ").lower()
         if salir != "sí":
             print("Gracias por usar el bot. ¡Hasta pronto!")
